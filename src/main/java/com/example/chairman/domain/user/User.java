@@ -8,13 +8,16 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "test")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //SpringBoot 2.0 부터 auto increment 위해서 필수
     @Column(name = "_id", unique = true, nullable = false)
     private Long id;
+
+    @Column(name = "uuid", unique = true, nullable = false)
+    private String uuid;
 
     @Column(name = "userId", unique = true, nullable = false)
     private String userId;
@@ -41,8 +44,9 @@ public class User {
     private String role;
 
 
-    @Builder
-    public User(String userId, String password, String name, String nickname, String phone, String birth, String gender, String role) {
+    @Builder // setter와 달리 인자로 잘못된 갑을 전달하는 문제가 없어서 빌더 클래스 사용 권장
+    public User(String uuid, String userId, String password, String name, String nickname, String phone, String birth, String gender, String role) {
+        this.uuid = uuid;
         this.userId = userId;
         this.password = password;
         this.name = name;

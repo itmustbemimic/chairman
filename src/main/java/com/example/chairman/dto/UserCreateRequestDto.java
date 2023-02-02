@@ -4,10 +4,12 @@ import com.example.chairman.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
 @NoArgsConstructor
 public class UserCreateRequestDto {
+    private String uuid;
     private String userId;
     private String password;
     private String name;
@@ -18,7 +20,8 @@ public class UserCreateRequestDto {
     private String role;
 
     @Builder
-    public UserCreateRequestDto(String userId, String password, String name, String nickname, String phone, String birth, String gender, String role) {
+    public UserCreateRequestDto(String uuid, String userId, String password, String name, String nickname, String phone, String birth, String gender, String role) {
+        this.uuid = uuid;
         this.userId = userId;
         this.password = password;
         this.name = name;
@@ -29,10 +32,11 @@ public class UserCreateRequestDto {
         this.role =  role;
     }
 
-    public User toEntity(){
+    public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
+                .uuid(uuid)
                 .userId(userId)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .name(name)
                 .nickname(nickname)
                 .phone(phone)

@@ -6,17 +6,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/join")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("test")
     public String helloWorld() {
         return "hello world";
     }
 
-    @PostMapping("/")
+    @PostMapping("join")
     public Long create(@RequestBody UserCreateRequestDto requestDto) {
         return userService.create(requestDto);
     }

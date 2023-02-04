@@ -56,4 +56,8 @@ public class User {
         this.gender = gender;
         this.role = role;
     }
+
+    public void roleUpdate() {
+        this.role = "P";
+    }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AdminService {
     List<User> getNPUser();
+    User permitUser(String uuid);
 }

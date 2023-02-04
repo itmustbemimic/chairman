@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.UUID;
+
 @Getter
 @NoArgsConstructor
 public class UserCreateRequestDto {
@@ -34,7 +36,7 @@ public class UserCreateRequestDto {
 
     public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
-                .uuid(uuid)
+                .uuid(UUID.randomUUID().toString())
                 .userId(userId)
                 .password(passwordEncoder.encode(password))
                 .name(name)
@@ -42,7 +44,7 @@ public class UserCreateRequestDto {
                 .phone(phone)
                 .birth(birth)
                 .gender(gender)
-                .role(role)
+                .role("NP")
                 .build();
     }
 }
